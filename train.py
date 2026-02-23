@@ -112,7 +112,7 @@ plt.savefig("models/feature_importance.png")
 plt.close()
 # Save Model + Features + Metrics
 
-joblib.dump(best_model, "models/model.pkl")
+joblib.dump(best_model, "models/model.pkl", compress=3)
 joblib.dump(X.columns.tolist(), "models/features.pkl")
 joblib.dump(best_name, "models/model_name.pkl")
 
