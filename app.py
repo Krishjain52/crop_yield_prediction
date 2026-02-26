@@ -14,19 +14,9 @@ st.title("Crop Yield Prediction System")
 st.write(f"Using Model: {model_name}")
 
 
-# Show Model Performance
-
-st.subheader("📊 Model Performance")
-
-st.write(f"MAE  : {metrics['mae']:.2f}")
-st.write(f"RMSE : {metrics['rmse']:.2f}")
-st.write(f"R²   : {metrics['r2']:.3f}")
-st.write(f"Approx Accuracy: {metrics['r2']*100:.2f}%")
-
-
 # User Input Section
 
-st.subheader("🌱 Enter Crop Details")
+st.subheader("Enter Crop Details")
 
 area = st.text_input("Area (Country)")
 item = st.text_input("Crop Type")
@@ -48,6 +38,10 @@ if st.button("Predict Yield"):
 
     input_df = pd.DataFrame([input_dict])
 
+    # Show Model Performance
+
+    
+
     # Feature Engineering
     input_df["rain_temp_ratio"] = (
         input_df["average_rain_fall_mm_per_year"] /
@@ -63,3 +57,6 @@ if st.button("Predict Yield"):
     prediction = model.predict(input_df)[0]
 
     st.success(f"🌾 Predicted Yield: {prediction:.2f} hg/ha")
+
+    st.subheader("Model Performance")
+    st.write(f"Approx Accuracy: {metrics['r2']*100:.2f}%")
