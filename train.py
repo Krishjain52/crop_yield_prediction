@@ -25,6 +25,7 @@ if "Unnamed: 0" in df.columns:
     df = df.drop("Unnamed: 0", axis=1)
 
 df = df.dropna()
+df_raw = df.copy()
 
 
 # Feature Engineering
@@ -123,5 +124,9 @@ metrics = {
 }
 
 joblib.dump(metrics, "models/metrics.pkl")
+areas = sorted(df_raw["Area"].dropna().unique().tolist())
+items = sorted(df_raw["Item"].dropna().unique().tolist())
+joblib.dump(areas, "models/areas.pkl")
+joblib.dump(items, "models/items.pkl")
 
 print("\nModel saved successfully!")
